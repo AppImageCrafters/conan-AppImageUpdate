@@ -5,6 +5,7 @@ env:
     - CONAN_LOGIN_USERNAME: "azubieta"
     - CONAN_CHANNEL: "stable"
     - CONAN_UPLOAD: "https://api.bintray.com/conan/appimage-conan-community/public-conan"
+    - CONAN_UPLOAD_DEPENDENCIES: "all"
 
 notifications:
   email: false

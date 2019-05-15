@@ -1,0 +1,32 @@
+Index: CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CMakeLists.txt	(revision d5e3361b41eb250665de0f1231e4cfdea5781dfd)
++++ CMakeLists.txt	(date 1557953918000)
+@@ -6,6 +6,9 @@
+ set(CMAKE_CXX_STANDARD 11)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ 
++include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
++conan_basic_setup()
++
+ # read Git revision ID
+ # WARNING: this value will be stored in the CMake cache
+ # to update it, you will have to reset the CMake cache
+Index: src/CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/CMakeLists.txt	(revision d5e3361b41eb250665de0f1231e4cfdea5781dfd)
++++ src/CMakeLists.txt	(date 1557953990000)
+@@ -39,6 +39,7 @@
+ # link thread libraries
+ target_link_libraries(libappimageupdate
+     PUBLIC libappimage_shared
++    PUBLIC  ${CONAN_LIBS}
+     PRIVATE ${CMAKE_THREAD_LIBS_INIT}
+     PRIVATE libzsync2
+     PRIVATE ${CPR_LIBRARIES}
