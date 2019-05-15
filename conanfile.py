@@ -18,7 +18,7 @@ class AppimageupdateConan(ConanFile):
 
         if (self.settings.arch == "x86" or self.settings.arch == "x86_64"):
             # match the arch naming convention used in AppImageKit
-            appimagetool_arch_name = "i686" if self.settings.arch == "x86" else self.settings.arch
+            appimagetool_arch_name = "i386" if self.settings.arch == "x86" else self.settings.arch
 
             tools.download(
                 "https://github.com/AppImage/AppImageUpdate/releases/download/%s/appimageupdatetool-%s.AppImage"
