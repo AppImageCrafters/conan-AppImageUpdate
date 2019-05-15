@@ -11,7 +11,7 @@ class AppimageupdateConan(ConanFile):
     description = "AppImageUpdate lets you update AppImages in a decentral way using information embedded in the AppImage itself.   "
     topics = ("AppImage", "Update")
     settings = "os", "compiler", "build_type", "arch"
-    requires = ("zlib/1.2.11@conan/stable")
+    build_requires = ("zlib/1.2.11@conan/stable")
     default_options = {"zlib:shared": True}
 
     def build(self):
@@ -24,12 +24,12 @@ class AppimageupdateConan(ConanFile):
 
             tools.download(
                 "https://github.com/AppImage/AppImageUpdate/releases/download/%s/appimageupdatetool-%s.AppImage"
-                % (self.version, appimagetool_arch_name), "appimageupdatetool.AppImage")
+                % (self.version, appimagetool_arch_name), "appimageupdatetool-%s.AppImage" % appimagetool_arch_name)
         else:
             raise errors.ConanInvalidConfiguration("Unsuported arch: %s" % self.settings.arch)
 
-        self.run("chmod +x appimageupdatetool.AppImage && ./appimageupdatetool.AppImage --appimage-extract",
-                 run_environment=True)
+        self.run("chmod +x appimageupdatetool-%s.AppImage && ./appimageupdatetool-%s.AppImage --appimage-extract"
+                 % (appimagetool_arch_name, appimagetool_arch_name), run_environment=True)
 
         tools.download("https://raw.githubusercontent.com/AppImage/AppImageUpdate/continuous/include/appimage/update.h",
                        "update.h")
