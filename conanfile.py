@@ -11,6 +11,8 @@ class AppimageupdateConan(ConanFile):
     description = "AppImageUpdate lets you update AppImages in a decentral way using information embedded in the AppImage itself.   "
     topics = ("AppImage", "Update")
     settings = "os", "compiler", "build_type", "arch"
+    requires = ("zlib/1.2.11@conan/stable")
+    default_options = {"zlib:shared": True}
 
     def build(self):
         if (self.settings.build_type != "Release"):
