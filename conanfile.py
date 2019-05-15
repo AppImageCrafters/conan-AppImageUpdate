@@ -11,8 +11,31 @@ class AppimageupdateConan(ConanFile):
     description = "AppImageUpdate lets you update AppImages in a decentral way using information embedded in the AppImage itself.   "
     topics = ("AppImage", "Update")
     settings = "os", "compiler", "build_type", "arch"
-    build_requires = ("zlib/1.2.11@conan/stable")
+    requires = ("zlib/1.2.11@conan/stable")
     default_options = {"zlib:shared": True}
+
+    def conanArchToSystem(self, conan_arch):
+        if conan_arch == "x86":
+            return "i386"
+        if conan_arch == "x86_64":
+            return "amd64"
+
+        return conan_arch
+
+    def configure(self):
+        if self.settings.compiler.libcxx == "libstdc++":
+            raise Exception("This package is only compatible with libstdc++11")
+
+    def system_requirements(self):
+        pkgs_name = None
+        system_arch = self.conanArchToSystem(self.settings.arch)
+        if tools.os_info.linux_distro == "ubuntu":
+            pkgs_name = ["linux-libc-dev:%s" % system_arch]
+
+        if pkgs_name:
+            installer = tools.SystemPackageTool()
+            for pkg_name in pkgs_name:
+                installer.install(pkg_name)
 
     def build(self):
         if (self.settings.build_type != "Release"):

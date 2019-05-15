@@ -7,7 +7,7 @@ class AppimageupdateTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     build_requires = [("cmake_installer/3.14.3@conan/stable")]
-    generators = "cmake_find_package"
+    generators = "cmake_find_package", "cmake"
 
     def build(self):
         cmake = CMake(self)
