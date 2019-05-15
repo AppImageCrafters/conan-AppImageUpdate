@@ -6,6 +6,9 @@ env:
     - CONAN_CHANNEL: "stable"
     - CONAN_UPLOAD: "https://api.bintray.com/conan/appimage-conan-community/public-conan"
 
+notifications:
+  email: false
+
 linux: &linux
   os: linux
   dist: xenial
