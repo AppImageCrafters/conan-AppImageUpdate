@@ -24,9 +24,6 @@ matrix:
     - <<: *linux
       env: CONAN_GCC_VERSIONS=4.8 CONAN_DOCKER_IMAGE=conanio/gcc48
 
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=conanio/gcc7
-
 install:
   - chmod +x .travis/install.sh
   - ./.travis/install.sh
